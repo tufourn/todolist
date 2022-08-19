@@ -26,7 +26,10 @@ function Task({ id, content, status, deleteTask, toggleTaskCompleteness }: any) 
 						checked={completed}
 						onChange={(event) => completeCheckboxHandler(event)}
 					/>
-					<Text strikethrough={completed}>
+					<Text 
+						strikethrough={completed}
+						color={completed ? 'dimmed' : ''}
+					>
 						{content}
 					</Text>
 				</Group>
