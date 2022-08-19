@@ -6,7 +6,7 @@ import Task from './Task'
 function TaskList({ tasks, deleteTask, toggleTaskCompleteness }: any) {
   return (
     <Stack>
-      {tasks.length > 0 ? (
+      {Array.isArray(tasks) && tasks.length ? (
         tasks.map((task: any) =>
           <Task
             key={task.id}

@@ -17,7 +17,7 @@ interface Task {
 export default function ApplicationShell() {
 	const theme = useMantineTheme();
 
-	const [tasks, setTasks] = useState<Task[]>(loadTaskLocal());
+	const [tasks, setTasks] = useState<Task[]>(loadTaskLocal() || []);
 
 	function addTask(newTask : Task) {
 		if (!newTask.content) { return; }
