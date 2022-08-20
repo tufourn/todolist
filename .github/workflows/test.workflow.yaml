@@ -13,7 +13,7 @@ jobs:
       BUCKET: test.tufourn.com
       DIST: build
       REGION: us-east-1
-      DIST_ID: E3PKIAYLW9752C
+      DIST_ID: E2JFT0UPRXMA3R
   
     steps:
       - name: Checkout
