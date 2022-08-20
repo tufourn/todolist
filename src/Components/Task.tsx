@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { Group, Card, Text, ActionIcon, Checkbox } from '@mantine/core'
 import { Trash } from 'tabler-icons-react'
 
-
 function Task({ id, content, status, deleteTask, toggleTaskCompleteness }: any) {
 	const [completed, setCompleted] = useState(status === 'completed');
 

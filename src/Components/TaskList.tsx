@@ -1,7 +1,5 @@
-import React from 'react';
 import { Stack, Text } from '@mantine/core'
 import Task from './Task'
-
 
 function TaskList({ tasks, deleteTask, toggleTaskCompleteness }: any) {
   return (

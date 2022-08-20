@@ -1,8 +1,7 @@
-import React, {useState} from 'react';
+import { useState } from 'react';
 import { Button, Modal, TextInput } from '@mantine/core'
 import { Plus } from 'tabler-icons-react'
-import {v4 as uuidv4} from "uuid";
-
+import { v4 as uuidv4 } from 'uuid';
 
 function AddTaskForm({addTask} : any) {
 	const [addModalOpened, setAddModalOpened] = useState(false);
