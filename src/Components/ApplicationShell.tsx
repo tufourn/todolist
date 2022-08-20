@@ -3,10 +3,12 @@ import {
 	AppShell, Container,
 	Header,
 	Text,
+	Group,
 	useMantineTheme,
 } from '@mantine/core';
 import AddTaskForm from "./AddTaskForm";
 import TaskList from "./TaskList";
+import LightDarkButton from "./LightDarkButton";
 
 interface Task {
 	id: string,
@@ -61,7 +63,7 @@ export default function ApplicationShell() {
 			}}
 			header={
 				<Header height={70} p="md">
-					<div style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
+					<Group position="apart">
 						<Text
 							component="span"
 							align="center"
@@ -71,7 +73,8 @@ export default function ApplicationShell() {
 							weight={700}
 							style={{ fontFamily: 'Open sans, sans-serif' }}
 						>todolist</Text>
-					</div>
+						<LightDarkButton />
+					</Group>
 				</Header>
 			}
 		>
