@@ -46,21 +46,14 @@ function CreateModifyTodoModal({opened, setOpened, todo} : any) {
 				required
 			/>
 			{ todo ?
-					<Button
-						mt="sm"
-						onClick={onModifyTodoClicked}
-					>
-						modify task
+					<Button mt="sm" onClick={onModifyTodoClicked}>
+						modify
 					</Button>
 					:
-					<Button
-						mt="sm"
-						onClick={onCreateTodoClicked}
-					>
-						create task
+					<Button mt="sm" onClick={onCreateTodoClicked}>
+						create
 					</Button>
 			}
-
 		</Modal>
   )
 }

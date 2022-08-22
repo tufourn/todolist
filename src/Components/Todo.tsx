@@ -26,7 +26,9 @@ function Todo({ todo }: any) {
           checked={todo.status === 'completed'}
           onChange={toggleTodo}
         />
-        <Text>
+        <Text
+          strikethrough={todo.status === 'completed'}
+          color={todo.status === 'completed' ? 'dimmed' : ''}>
           {todo.content}
         </Text>
       </Group>
