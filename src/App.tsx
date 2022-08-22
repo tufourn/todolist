@@ -1,15 +1,19 @@
-import {MantineProvider} from '@mantine/core';
+import { useState } from 'react';
+import { MantineProvider, ColorSchemeProvider, ColorScheme } from '@mantine/core';
+
 import ApplicationShell from "./Components/ApplicationShell";
 
 
 export default function App() {
+  const [colorScheme, setColorScheme] = useState<ColorScheme>('light');
+  const toggleColorScheme = (value?: ColorScheme) =>
+      setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'));
+
   return (
-    <MantineProvider
-      theme={{ colorScheme: 'light' }}
-      withGlobalStyles
-      withNormalizeCSS
-    >
-      <ApplicationShell />
-    </MantineProvider>
+      <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
+        <MantineProvider theme={{ colorScheme }} withGlobalStyles withNormalizeCSS>
+          <ApplicationShell />
+        </MantineProvider>
+      </ColorSchemeProvider>
   );
 }
