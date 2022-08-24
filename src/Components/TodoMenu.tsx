@@ -11,7 +11,7 @@ function TodoMenu({ todo }: any) {
   const [modifyModalOpened, setModifyModalOpened] = useState(false);
 
   const onDeleteTodoClicked = () => {
-    dispatch(deleteTodo(todo.id));
+    dispatch(deleteTodo(todo.todoId));
   };
 
   return (

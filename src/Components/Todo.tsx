@@ -8,7 +8,7 @@ function Todo({ todo }: any) {
 
   const toggleTodo = () => {
     const newStatus = todo.status === "completed" ? "created" : "completed";
-    const todoId = todo.id;
+    const todoId = todo.todoId;
     const data = {
       status: newStatus,
     };

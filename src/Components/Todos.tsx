@@ -15,7 +15,7 @@ function Todos() {
   return (
     <Stack>
       {Array.isArray(todos) && todos.length ? (
-        todos.map((todo: any) => <Todo key={todo.id} todo={todo} />)
+        todos.map((todo: any) => <Todo key={todo.todoId} todo={todo} />)
       ) : (
         <Text> nothing to do </Text>
       )}

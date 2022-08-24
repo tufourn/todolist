@@ -14,7 +14,7 @@ function CreateModifyTodoModal({ opened, setOpened, todo }: any) {
     if (content) {
       dispatch(
         addTodo({
-          id: nanoid(),
+          todoId: nanoid(),
           content: content,
           status: "created",
         })
@@ -25,7 +25,7 @@ function CreateModifyTodoModal({ opened, setOpened, todo }: any) {
   };
 
   const onModifyTodoClicked = () => {
-    const todoId = todo.id;
+    const todoId = todo.todoId;
     const data = {
       content: content,
     };

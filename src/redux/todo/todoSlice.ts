@@ -1,10 +1,10 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const TODOS_URL = "https://62de0ad679b9f8c30ab2290d.mockapi.io/api/v1/todolist";
+const TODOS_URL = "https://krir0fnlxa.execute-api.us-east-1.amazonaws.com/dev/common";
 
 interface Todo {
-  id: string;
+  todoId: string;
   content: string;
   status: string;
 }
@@ -43,7 +43,7 @@ export const deleteTodo = createAsyncThunk(
   async (todoId: string) => {
     try {
       const response = await axios.delete(TODOS_URL + `/${todoId}`);
-      return response.data;
+      return response.data.Item.Attributes;
     } catch (err) {
       return new Error("an error occurred while deleting todo");
     }
@@ -54,8 +54,8 @@ export const modifyTodo = createAsyncThunk(
   "todos/modifyTodo",
   async ({ todoId, data }: any) => {
     try {
-      const response = await axios.put(TODOS_URL + `/${todoId}`, data);
-      return response.data;
+      const response = await axios.patch(TODOS_URL + `/${todoId}`, data);
+      return response.data.Item.Attributes;
     } catch (err) {
       return new Error("an error occurred while modifying todo");
     }
@@ -69,20 +69,20 @@ export const todoSlice = createSlice({
   extraReducers(builder) {
     builder
       .addCase(fetchTodos.fulfilled, (state, action) => {
-        state.todos = action.payload;
+        state.todos = action.payload.todos;
       })
       .addCase(fetchTodos.rejected, (state, action) => {
         alert("error fetching todos, please try again");
       })
       .addCase(addTodo.fulfilled, (state, action) => {
-        state.todos.push(action.payload);
+        state.todos.push(action.payload.Item);
       })
       .addCase(addTodo.rejected, (state, action) => {
         alert("error creating todo, please try again");
       })
       .addCase(deleteTodo.fulfilled, (state, action) => {
         state.todos = state.todos.filter(
-          (todo) => todo.id !== action.payload.id
+          (todo) => todo.todoId !== action.payload.todoId
         );
       })
       .addCase(deleteTodo.rejected, (state, action) => {
@@ -90,7 +90,7 @@ export const todoSlice = createSlice({
       })
       .addCase(modifyTodo.fulfilled, (state, action) => {
         state.todos = state.todos.map((todo) => {
-          if (todo.id !== action.payload.id) {
+          if (todo.todoId !== action.payload.todoId) {
             return todo;
           }
           return action.payload;
