@@ -10,11 +10,13 @@ interface Todo {
 }
 
 interface TodosState {
-  todos: Todo[];
+  todos: Todo[]
+  loadingState: string // idle, loading, completed, failed
 }
 
 const initialState = {
   todos: [],
+  loadingState: 'idle'
 } as TodosState;
 
 export const fetchTodos = createAsyncThunk("todos/fetchTodos", async () => {
@@ -69,33 +71,52 @@ export const todoSlice = createSlice({
   extraReducers(builder) {
     builder
       .addCase(fetchTodos.fulfilled, (state, action) => {
+        state.loadingState = 'completed'
         state.todos = action.payload.todos;
       })
+      .addCase(fetchTodos.pending, (state, action) => {
+        state.loadingState = 'loading'
+      })
       .addCase(fetchTodos.rejected, (state, action) => {
+        state.loadingState = 'failed'
         alert("error fetching todos, please try again");
       })
       .addCase(addTodo.fulfilled, (state, action) => {
+        state.loadingState = 'completed'
         state.todos.push(action.payload.Item);
       })
+      .addCase(addTodo.pending, (state, action) => {
+        state.loadingState = 'loading'
+      })
       .addCase(addTodo.rejected, (state, action) => {
+        state.loadingState = 'failed'
         alert("error creating todo, please try again");
       })
       .addCase(deleteTodo.fulfilled, (state, action) => {
+        state.loadingState = 'completed'
         state.todos = state.todos.filter(
           (todo) => todo.todoId !== action.payload.todoId
         );
       })
-      .addCase(deleteTodo.rejected, (state, action) => {
-        alert("error deleting todo, please try again");
+      .addCase(deleteTodo.pending, (state, action) => {
+        state.loadingState = 'loading'
       })
       .addCase(modifyTodo.fulfilled, (state, action) => {
+        state.loadingState = 'completed'
         state.todos = state.todos.map((todo) => {
           if (todo.todoId !== action.payload.todoId) {
             return todo;
           }
           return action.payload;
-        });
-      });
+        })
+      })
+      .addCase(modifyTodo.pending, (state, action) => {
+        state.loadingState = 'loading'
+      })
+      .addCase(deleteTodo.rejected, (state, action) => {
+        state.loadingState = 'failed'
+        alert("error deleting todo, please try again");
+      })
   },
 });
 
